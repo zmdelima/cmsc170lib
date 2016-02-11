@@ -11,17 +11,27 @@ public class Solver {
          
         frontier f = new frontier();
         f.add(initialState);
-        
+        State currentState = initialState;
         while(!f.isEmpty()){
-            State currentState = f.removeFirst();            
-            if (GoalTest(curr)) {            
+            currentState = f.removeFirst();            
+            if (GoalTest(currentState)) {
+                System.out.println("FOUND IT!");
                 break;
             }
             else {
-                for ( Point p : getActions(currentState)) {
-                    frontier.add(Result(currentState s, p)
+                for ( Point p : getAction(currentState)) {
+                    f.add(Result(currentState,p));
                 }            
             }
+        }
+        
+        for(int i=0;i<5;i++){
+            for(int j=0;j<5;j++){
+                tp[i][j] = currentState.legalActions[i][j];
+                System.out.print(currentState.config[i][j]);
+                
+            }
+            System.out.print("\n");
         }
         
     }
@@ -30,10 +40,10 @@ public class Solver {
     
     }
     
-    public class State {
+    public static class State {
         int[][] config = new int[5][5];
         int[][] legalActions = new int[5][5];  
-        public State (int[][] a, int[][] b){
+        public State (int[][] a, int[][] b) {
             for(int i=0;i<5;i++){
                 for(int j=0;j<5;j++){
                     config[i][j] = a[i][j];
@@ -42,18 +52,25 @@ public class Solver {
             }
         }
         
-        public static int[][] toggle (int x, int y) {
-            this.legalActions[x][y] == 1; //set point p's coordinates into toggled ones;
-            this.config[x][y] = this.toggleConfig(config[x][y]);
-            if(y>0) this.config[x][y-1] = this.toggleConfig(this.config[x][y-1]);
-            if(y<4) this.config[x][y+1] = this.toggleConfig(this.config[x][y+1]);
-            if(x>0) this.config[x-1][y] = this.toggleConfig(this.config[x-1][y]);
-            if(x<4) this.config[x+1][y] = this.toggleConfig(this.config[x+1][y]);
+        public static State toggle (State s, int x, int y) {
+            s.legalActions[x][y] = 1; //set point p's coordinates into toggled ones;
+            s.config[x][y] = s.toggleConfig(s.config[x][y]);
+            if(y>0) s.config[x][y-1] = s.toggleConfig(s.config[x][y-1]);
+            if(y<4) s.config[x][y+1] = s.toggleConfig(s.config[x][y+1]);
+            if(x>0) s.config[x-1][y] = s.toggleConfig(s.config[x-1][y]);
+            if(x<4) s.config[x+1][y] = s.toggleConfig(s.config[x+1][y]);
+            
+            return s;
         }
         
         public static int toggleConfig (int a) {
-            if ( a == 1) return 0;
-            else return 1;
+            if ( a == 1) {
+                a = 0;
+            }
+            else if (a == 0) { 
+                a = 1;
+            }
+            return a;
         }
     }
     
@@ -80,17 +97,7 @@ public class Solver {
     public static State Result(State s, Point p) {
         State resultState = new State(s.config, s.legalActions);
         resultState.legalActions[p.x][p.y]=1;
-        resultState.toggle(p.x, p.y);
+        resultState = resultState.toggle(s, p.x, p.y);
         return resultState;
     }
-    /*
-    test = frontier.removeFirst();
-        //create toggle(state b, action a) --> for Result
-        
-        //create for(action a : getAction(currentState)){
-            frontier.add(Result(currentState s, action(Point) a)
-        }
-        //createGoalTest(that returns either true or false)
-        
-    */
 }

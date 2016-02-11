@@ -12,7 +12,7 @@ public class LightsOut {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setResizable(false);
 		
-		Board game = new Board();
+		final Board game = new Board();
 		
 		JButton solve = new JButton("Solve");
 		solve.setPreferredSize(new Dimension(200,40));
@@ -24,12 +24,14 @@ public class LightsOut {
                         for(int j=0;j<5;j++){
                             config[i][j]=game.b[i][j].trigger;                            
                             tp[i][j]=0;
-                        }    
+                            System.out.print(config[i][j]);
+                        }
+                        System.out.println();    
                     }
                     
                     Solver solution = new Solver(config, tp);
                     
-		        }
+		        }         
 		    });
 		final JFileChooser fc = new JFileChooser();
 		

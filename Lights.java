@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 public class Lights extends JButton implements ActionListener{
-	private int trigger;
+	public int trigger;
 	public int x, y;
 	public Lights (int i, int j) {
 		this.off();
