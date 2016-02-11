@@ -18,7 +18,17 @@ public class LightsOut {
 		solve.setPreferredSize(new Dimension(200,40));
 		solve.addActionListener(new ActionListener() {
 		        public void actionPerformed (ActionEvent e) {
-		            
+		            int[][] config = new int[5][5];
+                    int[][] tp = new int[5][5];
+                    for(int i=0;i<5;i++){
+                        for(int j=0;j<5;j++){
+                            config[i][j]=game.b[i][j].trigger;                            
+                            tp[i][j]=0;
+                        }    
+                    }
+                    
+                    Solver solution = new Solver(config, tp);
+                    
 		        }
 		    });
 		final JFileChooser fc = new JFileChooser();

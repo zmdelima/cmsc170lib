@@ -34,6 +34,5 @@ public class Lights extends JButton implements ActionListener{
 	
 	public void actionPerformed(ActionEvent arg0) {
 		Board.toggle(this.x,this.y);
-		
 	}
 }
