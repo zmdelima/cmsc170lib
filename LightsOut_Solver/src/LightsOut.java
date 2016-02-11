@@ -5,13 +5,14 @@ import java.awt.event.*;
 
 public class LightsOut {
 	public static void main (String[] args) {
+		//mainframe
 		final JFrame mainFrame = new JFrame("Lights Out!");
 		mainFrame.setPreferredSize(new Dimension(400,400));
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setResizable(false);
-		
+		//a board class for the game
 		final Board game = new Board();
-		
+		//button for solve
 		JButton solve = new JButton("Solve");
 		solve.setPreferredSize(new Dimension(200,40));
 		solve.addActionListener(new ActionListener() {
@@ -30,17 +31,19 @@ public class LightsOut {
                     
 		        }         
 		    });
-		final JFileChooser fc = new JFileChooser();
-		
+		//filechooser and browse button for file configuration input
+		final JFileChooser fc = new JFileChooser();		
 		JButton file = new JButton("Browse File");
 		file.setPreferredSize(new Dimension(200,40));
 		file.addActionListener(new ActionListener() { 
 		     public void actionPerformed (ActionEvent e) {
 		         int returnVal = fc.showOpenDialog(null);   
-		        
+		         //condition if user has chosen a file
 		         if(returnVal == JFileChooser.APPROVE_OPTION) {
 		            File file =  fc.getSelectedFile();
+		            //reading the file
 		            try {
+		                //transferring configurations from a file to the Board class named game
 		                BufferedReader br = new BufferedReader(new FileReader(file));
 		                String s;
 		                int j=0;
@@ -58,7 +61,7 @@ public class LightsOut {
 		     }
 		    
 		    });
-		
+		//button container and setting out the position of UI
 		Container buttons = new Container();
 		buttons.setLayout(new GridLayout(1,2,0,0));
 		buttons.add(solve);
