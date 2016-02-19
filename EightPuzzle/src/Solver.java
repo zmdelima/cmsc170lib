@@ -1,3 +1,4 @@
+//the packages
 import java.io.*;
 import java.awt.*;
 import javax.swing.*;
@@ -7,15 +8,19 @@ import java.util.*;
 import java.lang.Math;
 
 public class Solver { //Solver class
+    //the global variables
     public static HashMap <Integer, Point> gg = new HashMap<Integer, Point>();
     public static int i;
     public static int j;
+    
     public Solver (int[][] initConfig, int[][] initToggled) { //solver class constructor
         //creation of initial state and the frontier
         State initialState = new State(initConfig, initToggled,0,0,0,null);
-        //initial state list
+        //initial state lists
         stateList openList = new stateList();
-        stateList closedList = new stateList(); 
+        stateList closedList = new stateList();
+        
+        //initialization of openList
         openList.add(initialState);
         //creation of currentState
         State bestState = initialState;
@@ -81,14 +86,14 @@ public class Solver { //Solver class
             temp = s.config[x][y];
             s.config[x][y] = s.config[vert][hori];
             s.config[vert][hori] = temp;
-		    s.setCost();
+		    s.upCost();
 		    s.setDist();
 		    s.setTotal();
             //return the state
             return s;
         }
         
-        public void setCost() {
+        public void upCost() {
         	this.cost = this.cost + 1;
         }
         
@@ -112,13 +117,13 @@ public class Solver { //Solver class
         public void getLegalActions(int a, int b) {
         	for(int i=0;i<3;i++){
         		for(int j=0;j<3;j++){
-        			this.config[0][0]=0;
+        			this.legalActions[0][0]=0;
         		}
         	}
-          if(b>0) this.config[a][b-1] = 1;
-          if(b<4) this.config[a][b+1] = 1;
-          if(a>0) this.config[a-1][b] = 1;
-          if(a<4) this.config[a+1][b] = 1;
+          if(b>0) this.legalActions[a][b-1] = 1;
+          if(b<4) this.legalActions[a][b+1] = 1;
+          if(a>0) this.legalActions[a-1][b] = 1;
+          if(a<4) this.legalActions[a+1][b] = 1;
         	
         }
         
@@ -164,8 +169,8 @@ public class Solver { //Solver class
         State resultState = new State(s.config, s.legalActions, s.cost, s.dist, s.total, s);
         zero = s.getZero();
         resultState = resultState.toggle(resultState, p.x, p.y,zero[0],zero[1]);
-        resultState.getLegalActions(zero[0],zero[1]);
-        //resultState.setParent(s);
+        resultState.getLegalActions(p.x,p.y);
+        resultState.setParent(s);
         return resultState;
     }
 }
