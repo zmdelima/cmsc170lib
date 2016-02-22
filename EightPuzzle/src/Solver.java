@@ -59,6 +59,8 @@ public class Solver { //Solver class
     
     }
     
+    
+    //STATE OBJECT CLASS
     public static class State { //This state is used to hold the current configuration of a state and its toggled coordinates
         public static int[][] config = new int[3][3];
         public static int[][] legalActions = new int[3][3];
@@ -167,10 +169,11 @@ public class Solver { //Solver class
     	//result function for getting the result state of an Action done in toggling Point p
         int[] zero = new int[2];
         State resultState = new State(s.config, s.legalActions, s.cost, s.dist, s.total, s);
+        //getting zeroth tile position
         zero = s.getZero();
+        //toggling the action given from point p
         resultState = resultState.toggle(resultState, p.x, p.y,zero[0],zero[1]);
         resultState.getLegalActions(p.x,p.y);
-        resultState.setParent(s);
         return resultState;
     }
 }

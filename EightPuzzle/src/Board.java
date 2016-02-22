@@ -1,55 +1,79 @@
-//This class serves as container for the game's buttons/lights
+//This class serves as container for the game's buttons/tiles
 import java.awt.Container;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.lang.Math;
 
 public class Board extends Container{
-	public static Lights[][] b = new Lights[5][5];
+	public static Tiles[][] b = new Tiles[3][3];
 	
 	public Board () { //initiation
 		//setting of the lights/buttons of the board
-		for(int i=0;i<5;i++){
-			for(int j=0;j<5;j++){
-				b[i][j] = new Lights(i, j);
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
+				b[i][j] = new Tiles(i, j);
 				add(b[i][j]);
 			}
 		}
-		setLayout(new GridLayout(5,5,0,0));
+		setLayout(new GridLayout(3,3,0,0));
 	}
 	
-	
-	
-	public static void toggle (int x, int y) { //toggle function for the board for ease of trigger of buttons and changes
-	   b[x][y].toggle();
-	   if(y>0)b[x][y-1].toggle();
-        if(y<4)b[x][y+1].toggle();
-        if(x>0)b[x-1][y].toggle();
-        if(x<4)b[x+1][y].toggle();
-		//checkGame();
+	//method for swapping tiles
+	public static void toggle(int row, int col) {
+	    //initialize temporary variables
+	    int x1,y1,x2,y2;
+	    int zero[] = getZero();
+        //assign values to initialized temp variables
+        x1=zero[0];
+        y1=zero[1];
+        x2=b[row][col].getXPos();
+        y2=b[row][col].getYPos();
+	    //set condition if manhattan distance of button to 0 is 1 then swap tiles
+	    //else do nothing
+	    if( Math.abs(x1-x2) + Math.abs(y1-y2) == 1) {
+	        System.out.println("\nButton "+b[x1][y1].getValue()+" must go to "+b[x2][y2].getXPos()+","+b[x2][y2].getYPos());
+	        System.out.println("Button "+b[x2][y2].getValue()+" must go to "+b[x1][y1].getXPos()+","+b[x1][y1].getYPos());
+	        b[x1][y1].setValues(zero[0],zero[1],b[x2][y2].getValue());
+	        b[x2][y2].setValues(b[x2][y2].getXPos(),b[x2][y2].getYPos(),0);
+	        System.out.println("Button "+b[x2][y2].getValue()+" goes to "+b[x2][y2].getXPos()+","+b[x2][y2].getYPos());
+	        System.out.println("Button "+b[x1][y1].getValue()+" goes to "+b[x1][y1].getXPos()+","+b[x1][y1].getYPos());
+	    }
+	    checkGame();
+	    return;
 	}
-	
-	public static void set (int x, int y, int stat) { //set function for setting a button's property if on==stat==1 or off==stat==0
-		if(stat == 1){
-			b[x][y].on();
-		}
-		else {
-			b[x][y].off();
-		}
+	//function for gettingZero
+	public static int[] getZero() {
+	    int[] zero = {2,2};
+	    for(int i=0;i<3;i++){
+	        for(int j=0;j<3;j++){
+	            if(b[i][j].getValue() == 0){
+	              zero[0]=i;
+	              zero[1]=j;
+	              return zero;
+	            }
+	        }
+	    }
+	    return zero;
 	}
-	
-	public static int checkGame () { //function for checking if the player already wins
-		int total = 0;
-        for(int i=0;i<5;i++){
-            for(int j=0;j<5;j++){
-                total = total + b[i][j].getStatus();  
+	//function for GoalTest or victory
+	public static void checkGame () { //function for checking if the player already wins
+		int temp = 0;
+        boolean res = true;
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(i==2 && j==2) continue;
+                temp = (i*3) + j + 1;
+                if(temp != b[i][j].getValue()){
+                    res = false;
+                }  
             }
         }
-        if(total==0){
+        
+        if(res){
             JOptionPane.showMessageDialog(new JFrame(),"You Win!","VICTORY!",JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         }
-		return total;
 	}
 	
 }
