@@ -17,12 +17,15 @@ public class EightPuzzle {
 		solve.setPreferredSize(new Dimension(200,40));
 		solve.addActionListener(new ActionListener() {
 		        public void actionPerformed (ActionEvent e) {
-		            int[][] config = new int[5][5];
-                    int[][] tp = new int[5][5];
-                    for(int i=0;i<5;i++){
-                        for(int j=0;j<5;j++){
+		            int[][] config = new int[3][3];
+                    int[][] tp = new int[3][3];
+                    for(int i=0;i<3;i++){
+                        for(int j=0;j<3;j++){
                             config[i][j]=game.b[i][j].getValue();                            
-                            tp[i][j]=0;
+                            if(config[i][j]==0){
+                                if(i>2)
+                                if(i>0)
+                            }
                         }
                         System.out.println();    
                     }
@@ -47,9 +50,9 @@ public class EightPuzzle {
 		                BufferedReader br = new BufferedReader(new FileReader(file));
 		                String s;
 		                int j=0;
-		                while((s = br.readLine()) != null || j<5) {
+		                while((s = br.readLine()) != null || j<3) {
 		                    String[] row = s.split(" ");
-		                    for(int i=0;i<5;i++){
+		                    for(int i=0;i<3;i++){
 		                        Board.b[i][j].setValues(j,i,Integer.parseInt(row[i]));	
 		                    }
 		                    j++;

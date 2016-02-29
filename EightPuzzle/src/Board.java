@@ -32,12 +32,12 @@ public class Board extends Container{
 	    //set condition if manhattan distance of button to 0 is 1 then swap tiles
 	    //else do nothing
 	    if( Math.abs(x1-x2) + Math.abs(y1-y2) == 1) {
-	        System.out.println("\nButton "+b[x1][y1].getValue()+" must go to "+b[x2][y2].getXPos()+","+b[x2][y2].getYPos());
-	        System.out.println("Button "+b[x2][y2].getValue()+" must go to "+b[x1][y1].getXPos()+","+b[x1][y1].getYPos());
+	        //System.out.println("\nButton "+b[x1][y1].getValue()+" must go to "+b[x2][y2].getXPos()+","+b[x2][y2].getYPos());
+	        //System.out.println("Button "+b[x2][y2].getValue()+" must go to "+b[x1][y1].getXPos()+","+b[x1][y1].getYPos());
 	        b[x1][y1].setValues(zero[0],zero[1],b[x2][y2].getValue());
 	        b[x2][y2].setValues(b[x2][y2].getXPos(),b[x2][y2].getYPos(),0);
-	        System.out.println("Button "+b[x2][y2].getValue()+" goes to "+b[x2][y2].getXPos()+","+b[x2][y2].getYPos());
-	        System.out.println("Button "+b[x1][y1].getValue()+" goes to "+b[x1][y1].getXPos()+","+b[x1][y1].getYPos());
+	        //System.out.println("Button "+b[x2][y2].getValue()+" goes to "+b[x2][y2].getXPos()+","+b[x2][y2].getYPos());
+	        //System.out.println("Button "+b[x1][y1].getValue()+" goes to "+b[x1][y1].getXPos()+","+b[x1][y1].getYPos());
 	    }
 	    checkGame();
 	    return;
