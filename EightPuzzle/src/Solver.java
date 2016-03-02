@@ -14,15 +14,11 @@ public class Solver { //Solver class
     //Solver class constructor
     public Solver (int[][] initConfig, int[][] initToggled) { 
         //creation of initial state and the frontier
-        State initialState = new State(initConfig, initToggled,0,0,0,null);
+        State initialState = new State(initConfig, initToggled,-1,0,0,null);
         //initial state lists
         initialState.setDist();
         initialState.setTotal();
         
-        //============DISCARD BEFORE RELEASE
-        initialState.print();
-        initialState.printActions();
-        //============
         
         if(!checkSolvable(initialState)){
             JOptionPane.showMessageDialog(new JFrame(),"Tile Configuration Unsolvable!","Unsolvable Puzzle!",JOptionPane.WARNING_MESSAGE);
@@ -44,10 +40,6 @@ public class Solver { //Solver class
             bestState = openList.removeFirst();            
             closedList.add(bestState);
             if (GoalTest(bestState)) { //condition if the currentState has the solution
-                System.out.println("Done");
-                System.out.println("Distance = "+ bestState.getDist());
-                System.out.println("THIS IS IT?");
-                bestState.print();
                 break;
             }
             else { //condition if the currentState does not have the solution yet
@@ -60,10 +52,7 @@ public class Solver { //Solver class
                 	    if (stateComp(s,openList.get(i))) {
                 	        if(s.getCost() < openList.get(i).getCost()){
                     	        oRes = i;
-                	        }
-                	        else if(s.getCost() == openList.get(i).getCost()){
-                	            openList.remove(i);
-                	            i--;
+                    	        break;
                 	        }
                 	    } 
                 	}
@@ -71,8 +60,6 @@ public class Solver { //Solver class
                 	//scanning for same state configuration
                 	for (j=0;j<closedList.size();j++){
                     	if (stateComp(s,closedList.get(j))) {
-                	        
-                	        closedList.get(j).print();
                 	        if (s.getCost() < closedList.get(j).getCost()) {
                     	        cRes = j;
                     	        break;
@@ -82,7 +69,6 @@ public class Solver { //Solver class
                 	
                 	//if -1 on both closed and open add to openList, where? search
                 	if (oRes < 0 && cRes < 0){
-                	        
                 	    for(i=0;i<openList.size();i++){
                 	        if (s.getTotal() < openList.get(i).getTotal()) {
                 	            openList.add(i,s);
@@ -103,7 +89,7 @@ public class Solver { //Solver class
                 	//if 0<= closed but -1 on open  -> closed.remove(c), closed.add(c,s)
                 	else if (oRes < 0 && cRes >= 0) {
                 	    closedList.remove(cRes);
-                	    closedList.add(cRes,s);
+                	    openList.add(openList.size(),s);
                 	} 
                 	//if 0<= closed and 0<= open    -> open.remove(o), closed.remove(c), closed.add(c,s)
                 	else if (oRes >= 0 && cRes >=0) {
@@ -111,7 +97,7 @@ public class Solver { //Solver class
                 	    closedList.remove(cRes);
                 	    closedList.add(cRes,s);
                 	}
-                }            
+                }
             }
         }
         
@@ -128,8 +114,7 @@ public class Solver { //Solver class
             File file = new File("8puzzle.out");
             output = new BufferedWriter(new FileWriter(file));
             sol = sol+"START\n----------\n";
-            while(!solutionList.isEmpty()){
-                State s = solutionList.removeFirst();
+            for(State s : solutionList){
                 for(int i=0;i<3;i++){
                     for(int j=0;j<3;j++){
                         sol = sol+" "+s.getConfig(i,j);
@@ -208,9 +193,7 @@ public class Solver { //Solver class
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
                 list[(i*3)+j]=s.getConfig(i,j);
-                //System.out.print(" "+list[(i*3)+j]);
             }
-            System.out.println();
         }
         
         for(int i=0;i<list.length;i++){
@@ -224,7 +207,6 @@ public class Solver { //Solver class
         }
     
         if(inv%2 == 1)return false;
-        System.out.println("Solvable");
         return true;
     }
     

@@ -18,7 +18,7 @@ public class State { //This state is used to hold the current configuration of a
             }
         }
         this.parent = pState;
-        this.cost = cost;
+        this.cost = cost + 1;
         this.dist = dist;
         this.total = total;
     }
@@ -30,18 +30,9 @@ public class State { //This state is used to hold the current configuration of a
         temp = this.config[x][y];
         this.config[x][y] = this.config[vert][hori];
         this.config[vert][hori] = temp;
-	    this.upCost();
 	    this.setDist();
 	    this.setTotal();
         
-        
-        //printing the state
-        /*
-        System.out.println("\n=================================\nZERO at "+vert+","+hori);
-        System.out.println("TOGGLED at "+x+","+y);
-        this.print();
-        this.printActions();
-        */
     }
     
     //method for getting this.instance's cost
@@ -57,9 +48,6 @@ public class State { //This state is used to hold the current configuration of a
         return this.total;
     }
     //method for new state for increasing its cost by 1
-    public void upCost() {
-    	this.cost = this.cost + 1;
-    }
 
     //methods for getting state attribute values
     public int getConfig(int i, int j) {
@@ -129,14 +117,9 @@ public class State { //This state is used to hold the current configuration of a
     	return zero;
     }
     
-    
-    
-    
-    
-    
     //printing state values
     public void print() {
-        System.out.println("State\n------------------");
+        System.out.println("State C ="+this.getCost()+" H="+this.getDist()+"\n------------------");
         for(int i=0;i<3;i++){
     		for(int j=0;j<3;j++){
     			System.out.print(" "+this.config[i][j]);

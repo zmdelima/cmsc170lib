@@ -1,4 +1,4 @@
-//This class serves as the buttons/lights
+//This class serves as the buttons/tiles
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
