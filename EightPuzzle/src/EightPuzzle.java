@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class EightPuzzle {
 	public static void main (String[] args) {
 		//mainframe
-		final JFrame mainFrame = new JFrame("Lights Out!");
+		final JFrame mainFrame = new JFrame("Eight Puzzle");
 		mainFrame.setPreferredSize(new Dimension(400,400));
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setResizable(false);
@@ -23,15 +23,21 @@ public class EightPuzzle {
                         for(int j=0;j<3;j++){
                             config[i][j]=game.b[i][j].getValue();                            
                             if(config[i][j]==0){
-                                if(i>2)
-                                if(i>0)
+                                if(j>0) tp[i][j-1] = 1;
+                                if(j<2) tp[i][j+1] = 1;
+                                if(i>0) tp[i-1][j] = 1;
+                                if(i<2) tp[i+1][j] = 1;
+                            } else {
+                                tp[i][j]=0;
                             }
                         }
                         System.out.println();    
                     }
-                    
+                    game.setEnabled(false);
                     Solver solution = new Solver(config, tp);
-                    
+                    stateList s = solution.getList();
+                    //create instance of frame w/ solution board and prev next button
+                    game.setEnabled(true);
 		        }         
 		    });
 		//filechooser and browse button for file configuration input
@@ -53,7 +59,7 @@ public class EightPuzzle {
 		                while((s = br.readLine()) != null || j<3) {
 		                    String[] row = s.split(" ");
 		                    for(int i=0;i<3;i++){
-		                        Board.b[i][j].setValues(j,i,Integer.parseInt(row[i]));	
+		                        game.b[i][j].setValues(j,i,Integer.parseInt(row[i]));
 		                    }
 		                    j++;
 		                }

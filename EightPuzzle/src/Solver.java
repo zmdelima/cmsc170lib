@@ -9,6 +9,7 @@ import java.lang.Math;
 
 public class Solver { //Solver class
     //the global variables
+    public stateList solutionList = new stateList();
     
     //Solver class constructor
     public Solver (int[][] initConfig, int[][] initToggled) { 
@@ -32,7 +33,6 @@ public class Solver { //Solver class
         
         stateList openList = new stateList();
         stateList closedList = new stateList();
-        stateList solutionList = new stateList();
         
         //initialization of openList
         openList.add(initialState);
@@ -84,7 +84,7 @@ public class Solver { //Solver class
                 	if (oRes < 0 && cRes < 0){
                 	        
                 	    for(i=0;i<openList.size();i++){
-                	        if (s.getCost() < openList.get(i).getCost()) {
+                	        if (s.getTotal() < openList.get(i).getTotal()) {
                 	            openList.add(i,s);
                 	            break;
                 	        }
@@ -122,7 +122,6 @@ public class Solver { //Solver class
         }
         solutionList.addFirst(initialState);
                 
-        
         //creation of the Solution File
         try {
             String sol = "";
@@ -140,7 +139,7 @@ public class Solver { //Solver class
                 sol = sol+"----------\n";
             }
             output.write(sol,0,sol.length());
-            
+            JOptionPane.showMessageDialog(new JFrame(),"Successfully created solution in \"8puzzle.out\" file","Puzzle Solved!",JOptionPane.INFORMATION_MESSAGE);  
         } catch (IOException ex) {
           ex.printStackTrace();
         } finally {
@@ -152,12 +151,13 @@ public class Solver { //Solver class
         }
         
         
+        
     }
     
-    //class stateList for openList and closedList, a linkedlist(container) of 'States'
-    public static class stateList extends LinkedList<State> { //class for openlist and closedlist
-    
+    public stateList getList(){
+        return this.solutionList;
     }
+    
     //getAction function for sending a linkedlist of viable actions that can be done
     public static LinkedList<Point> getAction(State s) { 
         LinkedList<Point> p = new LinkedList<Point>();

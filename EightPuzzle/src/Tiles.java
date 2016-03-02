@@ -3,8 +3,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import java.lang.Math;
-
 public class Tiles extends JButton implements ActionListener{
 	int value;
 	int xPos, yPos;
@@ -21,8 +19,9 @@ public class Tiles extends JButton implements ActionListener{
 		
 		if(this.value == 0) {
 		    this.setText("");
+	    	this.setBackground(Color.BLACK);
+		    this.setForeground(Color.WHITE);
 		}
-		
 		this.addActionListener(this);
 	}
 	//getting "tile value" attribute value
@@ -45,10 +44,15 @@ public class Tiles extends JButton implements ActionListener{
 		
 		if(value == 0) {
 		    this.setText("");
+		    this.setBackground(Color.BLACK);
+		    this.setForeground(Color.WHITE);
+
 		}
 		
 		else {
-		    this.setText(Integer.toString(this.getValue()));
+		    this.setText(Integer.toString(this.getValue()));    
+	    	this.setBackground(new JButton().getBackground());
+		    this.setForeground(Color.BLACK);
 		}
 	}
 	

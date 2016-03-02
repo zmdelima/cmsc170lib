@@ -76,4 +76,11 @@ public class Board extends Container{
         }
 	}
 	
+	public void stateSet (State s) {
+	    for(int i=0;i<3;i++){
+	        for(int j=0;j<3;j++){
+	            this.b[i][j].setValue(i,j,s.getConfig(i,j));
+	        }
+	    }
+	}
 }
