@@ -1,3 +1,5 @@
+//class for the SolverUI
+//packages needed
 import java.awt.*;
 import javax.swing.*;
 import java.io.*;
@@ -5,12 +7,13 @@ import java.awt.event.*;
 import java.util.LinkedList;
 
 public class solverUI extends JFrame{
+	//class solverUI variables
     public LinkedList<State> list;
     public solTiles[][] solT = new solTiles[3][3];
     public int sNum;
     public solButton next;
     public solButton prev;
-    
+    //class constructor
     public solverUI (LinkedList<State> s) {
         if(s.size()==0){
             JOptionPane.showMessageDialog(new JFrame(),"There are no current Solutions to be displayed!","Solution Empty!",JOptionPane.WARNING_MESSAGE);
@@ -51,6 +54,7 @@ public class solverUI extends JFrame{
 		this.setVisible(true);
     }
     
+    //method for setting the solverUIboard's tiles when moved forward or backward
     public void setBoard(int move){
         this.setPanel(move);
         State s = this.list.get(this.getPanel());
@@ -71,18 +75,22 @@ public class solverUI extends JFrame{
         }
     }
     
+    //set's solverUI's variable current panel/ith state in its list
     public void setPanel(int move){
         this.sNum = sNum + move;
     }
     
+    //getting solverUI's current panel variable
     public int getPanel() {
         return this.sNum;
     }
     
+    //getting this UI's NEXT button 
     public solButton getNext() {
         return this.next;
     }
     
+    //getting this UI's PREV button
     public solButton getPrev() {
         return this.prev;
     }
