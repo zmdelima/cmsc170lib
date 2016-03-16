@@ -19,7 +19,6 @@ public class Solver { //Solver class
         initialState.setDist();
         initialState.setTotal();
         
-        
         if(!checkSolvable(initialState)){
             JOptionPane.showMessageDialog(new JFrame(),"Tile Configuration Unsolvable!","Unsolvable Puzzle!",JOptionPane.WARNING_MESSAGE);
             return;
@@ -45,6 +44,11 @@ public class Solver { //Solver class
             else { //condition if the currentState does not have the solution yet
                 for ( Point p : getAction(bestState)) {
                     State s = Result(bestState,p);
+                    if(GoalTest(s)){
+                        openList.addFirst(s);
+                        break;
+                    }
+                    System.out.println("CurrS Fail");
                 	int i,j,oRes=-1,cRes=-1;
                 	
                 	//scanning for same state configuration
@@ -52,9 +56,10 @@ public class Solver { //Solver class
                 	    if (stateComp(s,openList.get(i))) {
                 	        if(s.getCost() < openList.get(i).getCost()){
                     	        oRes = i;
-                    	        break;
                 	        }
-                	    } 
+                	        openList.remove(i);
+                	        i--;
+                	    }
                 	}
                 	
                 	//scanning for same state configuration
@@ -75,7 +80,7 @@ public class Solver { //Solver class
                 	            break;
                 	        }
                 	    }
-                	    if (i == openList.size() && !openList.contains(s)) {
+                	    if (i == openList.size()) {
                 	        openList.add(i,s);
                 	    }
                 	}
@@ -83,13 +88,21 @@ public class Solver { //Solver class
                 	//if -1 on closed but 0 <= open -> open.remove(o), open.add(o,s)
                 	else if (oRes >= 0 && cRes < 0) {
                 	    openList.remove(oRes);
-                	    openList.add(oRes,s);
+                	    for(i=0;i<openList.size();i++){
+                	        if (s.getTotal() < openList.get(i).getTotal()) {
+                	            openList.add(i,s);
+                	            break;
+                	        }
+                	    }
+                	    if (i == openList.size()) {
+                	        openList.add(i,s);
+                	    }
                 	}
                 	
                 	//if 0<= closed but -1 on open  -> closed.remove(c), closed.add(c,s)
                 	else if (oRes < 0 && cRes >= 0) {
                 	    closedList.remove(cRes);
-                	    openList.add(openList.size(),s);
+                	    closedList.add(cRes,s);
                 	} 
                 	//if 0<= closed and 0<= open    -> open.remove(o), closed.remove(c), closed.add(c,s)
                 	else if (oRes >= 0 && cRes >=0) {
@@ -97,10 +110,11 @@ public class Solver { //Solver class
                 	    closedList.remove(cRes);
                 	    closedList.add(cRes,s);
                 	}
+                	System.out.println("OStates:"+openList.size());
                 }
             }
         }
-        
+        System.out.println("Done");
         //grouping up of each state solution
         while(bestState.parent != null){
             solutionList.addFirst(bestState);
