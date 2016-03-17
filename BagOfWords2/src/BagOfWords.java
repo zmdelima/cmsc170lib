@@ -1,7 +1,7 @@
 //Author:Zydrick Jan M. Delima
 //S.N.:2013-42012
-//Date created: Mar 15-17,2016
-//Desc: Program with spam filtering system with the use of Naive Bayes classifier algorithm/method
+//Date created: Mar 17,2016
+//Desc: Program with spam filtering system with the use of Naive Bayes classifier algorithm/method with Laplace Smoothing
 
 //packages to be used for BagOfWords
 import java.io.*;
@@ -17,6 +17,7 @@ public class BagOfWords {
     public final static LinkedHashMap<String,Integer> ham = new LinkedHashMap<String,Integer>();
     public static int total;
     public static int tdSize;
+    public static int k;
     public static int dSize1;
     public static int dSize2;
     public static int spamLines;
@@ -38,6 +39,7 @@ public class BagOfWords {
         result    = 0; //for spam probability computation result variable handler
         spamLines = 0; //for the number of message lines in the spam text file input
         hamLines  = 0; //for the number of message lines in the ham text file input
+        k         = 0; //for laplace smoothing factor
         
         //components for spam label display/status
         JLabel spamLabel = new JLabel("Total words in Spam:");
@@ -54,13 +56,17 @@ public class BagOfWords {
         hamTotal.setBackground(Color.WHITE);
         
         //components for input textArea
-        JLabel inputLabel = new JLabel("Input:                  ");
+        JLabel inputLabel = new JLabel("Input:                                            ");
         final JTextArea input = new JTextArea("");
         input.setWrapStyleWord(false);
         input.setRows(15);
         input.setText("");
         input.setLineWrap(true);
         input.setPreferredSize(new Dimension(300,100));
+        
+        JLabel kLabel = new JLabel("K:");
+        final JTextField kValue = new JTextField("0");
+        kValue.setPreferredSize(new Dimension(50,25));
         
         //JButton and JLabel for Dictionary Size
         JLabel bagSize = new JLabel("Dictionary Size: ");
@@ -225,12 +231,18 @@ public class BagOfWords {
         filter.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 //variables needed
-                double upper;
-                double lower;
+                double upper   = 1;
+                double lower   = 1;
+                int new_words  = 0; 
+                int Snew_words = 0;
+                int Hnew_words = 0;
                 mod3.setRowCount(0);
+                
+                k = Integer.parseInt(kValue.getText());
                 String user_inputs = input.getText();
-                  String[] l = user_inputs.split("\n");
-            
+                String[] l = user_inputs.split("\n");
+                
+                                 
                 if(user_inputs.length() == 0){ 
                     JOptionPane.showMessageDialog(new JFrame(),"There are no lines to identify!","Empty Input Area",JOptionPane.ERROR_MESSAGE);
                     return;
@@ -240,9 +252,24 @@ public class BagOfWords {
                 //parsing every word to match every frequency
                 //calculate spam probability via every word in the message via naive bayes method   
                 for(String s : l) {
-                    upper = 1;
-                    lower = 1;
+                    //initial local variable loop values
+                    upper      = 1;
+                    lower      = 1;
+                    new_words  = 0;
+                    Snew_words = 0;
+                    Hnew_words = 0;
+                    
                     String[] row = s.split(" ");
+                    //loop for getting new words in both spam and ham tables
+                    for(String i : row) {
+                        i = i.toLowerCase().replaceAll("[^A-Za-z0-9]","");
+                        if(!(spam.containsKey(i))){
+                            Snew_words = Snew_words + 1;
+                        }
+                        if(!(ham.containsKey(i))){
+                            Hnew_words = Hnew_words + 1;
+                        }
+                    }
                     for(String i : row){
                         i = i.toLowerCase().replaceAll("[^A-Za-z0-9]","");
                         
@@ -252,23 +279,24 @@ public class BagOfWords {
                         
                         //getting P(w|SPAM)
                         if(spam.containsKey(i)){
-                            upper = upper * (spam.get(i)/(double)dSize1);
+                            upper = upper * ( (spam.get(i) + k) /(double) (dSize1 + (k * (tdSize + Snew_words))));
+                            
                         } else {
-                            upper = 0;
+                            upper = upper * ( (0 + k)           /(double) (dSize1 + (k * (tdSize + Snew_words))));
                         }
                         
                         //getting P(w|HAM)
                         if(ham.containsKey(i)){
-                            lower = lower * (ham.get(i)/(double)dSize2);
+                            lower = lower * ( (ham.get(i) + k) /(double) (dSize2 + (k * (tdSize + Hnew_words))));
                         } else {
-                            lower = 0;
+                            lower = lower * ( (0 + k)          /(double) (dSize2 + (k * (tdSize + Hnew_words))));
                         }
                     }
                     //final calculation of upper and lower halves
                     //multiplication of probability of spam at upper
                     //combination of (upper and lower) as resulting lower value 
-                    upper = upper * (spamLines/(double)(spamLines+hamLines));
-                    lower = lower * (hamLines/(double)(spamLines+hamLines));
+                    upper = upper * ( (spamLines + k) / (double)(spamLines + hamLines + (2 * k)));
+                    lower = lower * ( (hamLines + k)  / (double)(spamLines + hamLines + (2 * k)));
                     lower = lower + upper;
                     
                     //evaluation of message if it is a HAM or a SPAM
@@ -277,6 +305,7 @@ public class BagOfWords {
                         continue;
                     }
                     result = (double)upper/lower;
+                    System.out.println("Message"+l+"\nResulting value:"+result);
                     if(result > 0.5) {
                         mod3.addRow(new Object[]{s, "SPAM"});
                     }
@@ -349,6 +378,13 @@ public class BagOfWords {
         status.add(bagTotal);
         status.add(bagT);
                 
+        //container for the k user input        
+        Container kInput = new Container();
+        kInput.setLayout(new FlowLayout());
+        kInput.add(inputLabel);
+        kInput.add(kLabel);
+        kInput.add(kValue);
+        
         //container for input and output section and partition
         Container c3 = new Container();
         c3.setLayout(new GridBagLayout());
@@ -357,9 +393,10 @@ public class BagOfWords {
         config.gridy=0;
         c3.add(status,config);
         config.weightx=0;
+        config.fill = GridBagConstraints.BOTH;
         config.gridx=0;
         config.gridy=1;
-        c3.add(inputLabel,config);
+        c3.add(kInput,config);
         config.weightx=1;
         config.weighty=1;
         config.fill = GridBagConstraints.BOTH;
