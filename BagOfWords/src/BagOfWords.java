@@ -190,7 +190,7 @@ public class BagOfWords {
 		                		dSize2++;
 		                		if ( !(ham.containsKey(i)) ) {
 		                			ham.put(i,1);
-		                			    if(!(spam.containsKey(i)){
+		                			    if(!(spam.containsKey(i))){
 		                			        tdSize = tdSize + 1;
 		                			    }
 		                		} 
