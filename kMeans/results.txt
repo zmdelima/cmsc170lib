@@ -1,0 +1,190 @@
+DONE READING!
+HELLO!9
+Random number: 6
+Random number: 1
+Random number: 6
+Random number: 7
+Iteration 0:
+Centroid 1: 2.5 2.5
+Centroid 2: 3.0 3.0
+Centroid 3: 1.0 1.0
+Vector 0 points:  1.0 2.0
+Distance from Centroid1: 1.5811388300841898
+Distance from Centroid2: 2.23606797749979
+Distance from Centroid3: 1.0
+Vector 0's class: 2
+
+Vector 1 points:  3.0 3.0
+Distance from Centroid1: 0.7071067811865476
+Distance from Centroid2: 0.0
+Distance from Centroid3: 2.8284271247461903
+Vector 1's class: 1
+
+Vector 2 points:  4.0 1.0
+Distance from Centroid1: 2.1213203435596424
+Distance from Centroid2: 2.23606797749979
+Distance from Centroid3: 3.0
+Vector 2's class: 0
+
+Vector 3 points:  2.0 3.0
+Distance from Centroid1: 0.7071067811865476
+Distance from Centroid2: 1.0
+Distance from Centroid3: 2.23606797749979
+Vector 3's class: 0
+
+Vector 4 points:  2.5 5.0
+Distance from Centroid1: 2.5
+Distance from Centroid2: 2.0615528128088303
+Distance from Centroid3: 4.272001872658765
+Vector 4's class: 1
+
+Vector 5 points:  4.5 3.0
+Distance from Centroid1: 2.0615528128088303
+Distance from Centroid2: 1.5
+Distance from Centroid3: 4.031128874149275
+Vector 5's class: 1
+
+Vector 6 points:  2.5 2.5
+Distance from Centroid1: 0.0
+Distance from Centroid2: 0.7071067811865476
+Distance from Centroid3: 2.1213203435596424
+Vector 6's class: 0
+
+Vector 7 points:  1.0 1.0
+Distance from Centroid1: 2.1213203435596424
+Distance from Centroid2: 2.8284271247461903
+Distance from Centroid3: 0.0
+Vector 7's class: 2
+
+Vector 8 points:  3.0 4.0
+Distance from Centroid1: 1.5811388300841898
+Distance from Centroid2: 1.0
+Distance from Centroid3: 3.605551275463989
+Vector 8's class: 1
+
+Centroid1
+OLD POINT2.5
+NEW POINT1.8333333333333333
+RESULT=0.6666666666666667
+CHANGED AT POINT0
+CHANGE=true
+
+Centroid2
+OLD POINT3.0
+NEW POINT1.3541666666666665
+RESULT=1.6458333333333335
+CHANGED AT POINT0
+CHANGE=true
+
+Centroid3
+OLD POINT1.0
+NEW POINT1.0
+RESULT=0.0
+OLD POINT1.0
+NEW POINT1.5
+RESULT=-0.5
+CHANGED AT POINT1
+CHANGE=true
+
+----------------STOP =0---
+Iteration 2:
+Centroid 1: 1.8333333333333333 1.5
+Centroid 1NewPoints: 1.8333333333333333 1.5
+Centroid 2: 1.3541666666666665 1.5833333333333335
+Centroid 2NewPoints: 1.3541666666666665 1.5833333333333335
+Centroid 3: 1.0 1.5
+Centroid 3NewPoints: 1.0 1.5
+Vector 0 points:  1.0 2.0
+Distance from Centroid1: 0.97182531580755
+Distance from Centroid2: 0.5468501978502784
+Distance from Centroid3: 0.5
+Vector 0's class: 2
+
+Vector 1 points:  3.0 3.0
+Distance from Centroid1: 1.90029237516523
+Distance from Centroid2: 2.1715689732438976
+Distance from Centroid3: 2.5
+Vector 1's class: 1
+
+Vector 2 points:  4.0 1.0
+Distance from Centroid1: 2.2236106773543893
+Distance from Centroid2: 2.7093747997564965
+Distance from Centroid3: 3.0413812651491097
+Vector 2's class: 0
+
+Vector 3 points:  2.0 3.0
+Distance from Centroid1: 1.509230856356236
+Distance from Centroid2: 1.5569345326277817
+Distance from Centroid3: 1.8027756377319946
+Vector 3's class: 0
+
+Vector 4 points:  2.5 5.0
+Distance from Centroid1: 3.5629263877386586
+Distance from Centroid2: 3.603684938904744
+Distance from Centroid3: 3.8078865529319543
+Vector 4's class: 1
+
+Vector 5 points:  4.5 3.0
+Distance from Centroid1: 3.05959329178097
+Distance from Centroid2: 3.4501031586831656
+Distance from Centroid3: 3.8078865529319543
+Vector 5's class: 1
+
+Vector 6 points:  2.5 2.5
+Distance from Centroid1: 1.2018504251546631
+Distance from Centroid2: 1.4673826377450279
+Distance from Centroid3: 1.8027756377319946
+Vector 6's class: 0
+
+Vector 7 points:  1.0 1.0
+Distance from Centroid1: 0.97182531580755
+Distance from Centroid2: 0.6824308064233
+Distance from Centroid3: 0.5
+Vector 7's class: 2
+
+Vector 8 points:  3.0 4.0
+Distance from Centroid1: 2.758824226207808
+Distance from Centroid2: 2.9238750210788576
+Distance from Centroid3: 3.2015621187164243
+Vector 8's class: 1
+
+Centroid1
+OLD POINT1.8333333333333333
+NEW POINT1.8333333333333333
+RESULT=0.0
+OLD POINT1.5
+NEW POINT1.5
+RESULT=0.0
+CHANGE=false
+
+Centroid2
+OLD POINT1.3541666666666665
+NEW POINT1.3541666666666665
+RESULT=0.0
+OLD POINT1.5833333333333335
+NEW POINT1.5833333333333335
+RESULT=0.0
+CHANGE=false
+
+Centroid3
+OLD POINT1.0
+NEW POINT1.0
+RESULT=0.0
+OLD POINT1.5
+NEW POINT1.5
+RESULT=0.0
+CHANGE=false
+
+----------------STOP =1---
+Iteration 3:
+Centroid 1: 1.8333333333333333 1.5
+Centroid 1NewPoints: 1.8333333333333333 1.5
+Centroid 2: 1.3541666666666665 1.5833333333333335
+Centroid 2NewPoints: 1.3541666666666665 1.5833333333333335
+Centroid 3: 1.0 1.5
+Centroid 3NewPoints: 1.0 1.5
+Did not change!
+FINISH-----
+Centroid 1: 1.8333333333333333 1.5
+Centroid 2: 1.3541666666666665 1.5833333333333335
+Centroid 3: 1.0 1.5

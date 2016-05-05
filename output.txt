@@ -1,0 +1,58 @@
+Random number: 7
+Random number: 3
+Random number: 8
+Iteration 1:
+Centroid 1: 1.0 1.0
+Centroid 2: 2.0 3.0
+Centroid 3: 3.0 4.0
+Vector 0 points:  1.0 2.0
+ cP1.0 D0.0 cP1.0 D1.0 1.0
+ cP2.0 D1.0 cP3.0 D2.0 2.0
+ cP3.0 D4.0 cP4.0 D8.0 8.0
+Vector 0's class: 0
+Vector 1 points:  3.0 3.0
+ cP1.0 D4.0 cP1.0 D8.0 8.0
+ cP2.0 D1.0 cP3.0 D1.0 1.0
+ cP3.0 D0.0 cP4.0 D1.0 1.0
+Vector 1's class: 1
+Vector 2 points:  4.0 1.0
+ cP1.0 D9.0 cP1.0 D9.0 9.0
+ cP2.0 D4.0 cP3.0 D8.0 8.0
+ cP3.0 D1.0 cP4.0 D10.0 10.0
+Vector 2's class: 1
+Vector 3 points:  2.0 3.0
+ cP1.0 D1.0 cP1.0 D5.0 5.0
+ cP2.0 D0.0 cP3.0 D0.0 0.0
+ cP3.0 D1.0 cP4.0 D2.0 2.0
+Vector 3's class: 1
+Vector 4 points:  2.5 5.0
+ cP1.0 D2.25 cP1.0 D18.25 18.25
+ cP2.0 D0.25 cP3.0 D4.25 4.25
+ cP3.0 D0.25 cP4.0 D1.25 1.25
+Vector 4's class: 2
+Vector 5 points:  4.5 3.0
+ cP1.0 D12.25 cP1.0 D16.25 16.25
+ cP2.0 D6.25 cP3.0 D6.25 6.25
+ cP3.0 D2.25 cP4.0 D3.25 3.25
+Vector 5's class: 2
+Vector 6 points:  2.5 2.5
+ cP1.0 D2.25 cP1.0 D4.5 4.5
+ cP2.0 D0.25 cP3.0 D0.5 0.5
+ cP3.0 D0.25 cP4.0 D2.5 2.5
+Vector 6's class: 1
+Vector 7 points:  1.0 1.0
+ cP1.0 D0.0 cP1.0 D0.0 0.0
+ cP2.0 D1.0 cP3.0 D5.0 5.0
+ cP3.0 D4.0 cP4.0 D13.0 13.0
+Vector 7's class: 0
+Vector 8 points:  3.0 4.0
+ cP1.0 D4.0 cP1.0 D13.0 13.0
+ cP2.0 D1.0 cP3.0 D2.0 2.0
+ cP3.0 D0.0 cP4.0 D0.0 0.0
+Vector 8's class: 2
+Iteration 2:
+Did not change!
+FINISH-----
+Centroid 1: 1.0 1.5
+Centroid 2: 1.0833333333333333 1.0416666666666667
+Centroid 3: 2.1666666666666665 2.6666666666666665
