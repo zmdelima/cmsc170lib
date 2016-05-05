@@ -47,17 +47,14 @@ public class kMeans{
                     old_dim = dim;
                     counter = counter + 1;
                 }
-            System.out.println("DONE READING!");    
         } catch (Exception ee) {
             ee.printStackTrace();
         }
         
-        System.out.println("HELLO!"+counter);
         //randomize values   
         ArrayList<Integer> randTemp = new ArrayList<Integer>();
         for(i=0;i<k;i++){
             int rand = (new Random()).nextInt(counter);
-            System.out.println("Random number: "+rand);
             if (!(randTemp.contains(rand))) {
                 randTemp.add(rand);
                 Centroid c = new Centroid(((Vect) vectorMap.get(rand)).getPoints() ,(double) i);
@@ -74,55 +71,37 @@ public class kMeans{
             ((Centroid) cenList.get(i)).printPoints();
             System.out.println();
         }
-        System.out.println();
         
         //kMean loop
         while (stop == 0) {
             stop = 1;
             iteration = iteration + 1;
             for (i=0;i<vectorMap.size();i++) {
-                System.out.print("Vector "+i+" points: ");
-                ((Vect) vectorMap.get(i)).printPoints();
-                System.out.println();
                 
                 for (j=0;j<cenList.size();j++) {
-                    //System.out.print("Distances:");
                     ((Vect)vectorMap.get(i)).identifyClass( ((Centroid) cenList.get(j)).getPoints(), ((Centroid)cenList.get(j)).getClassification());
-                    System.out.println();
                 }
-                System.out.print("Vector "+i+"'s class: ");
                 int temp = (int) ((Vect) vectorMap.get(i)).getClassification();
-                System.out.println(temp+"\n");
                 ((Centroid) cenList.get(temp)).setPoints(((Vect) vectorMap.get(i)).getPoints());
             }
             
             for (i=0;i<cenList.size();i++) {
-                System.out.println("Centroid"+(i+1));
                 if (((Centroid) cenList.get(i)).didChange()) {
                     stop = 0;
                 }
-                System.out.println();
             }
             
-            System.out.println("----------------STOP ="+stop+"---");
             
-            System.out.println("Iteration "+(iteration+1)+":");
+            System.out.println("Iteration "+iteration+":");
             for (i=0;i<cenList.size();i++) {
                 System.out.print("Centroid "+(i+1)+":");
                 ((Centroid) cenList.get(i)).printPoints();
-                System.out.println();
-                
-                System.out.print("Centroid "+(i+1)+"NewPoints:");
-                ((Centroid) cenList.get(i)).printNewPoints();
-                System.out.println();
-                
+                System.out.println();                
                 ((Centroid) cenList.get(i)).clearNewPoints();
             }
         }
         
-        
-        System.out.println("Did not change!");
-        System.out.println("FINISH-----");
+        System.out.println("Final Centroid Values");
         
         for (i=0;i<cenList.size();i++) {
                 System.out.print("Centroid "+(i+1)+":");

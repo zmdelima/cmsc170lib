@@ -29,23 +29,18 @@ public class Centroid {
     }
     
     public void setPoints (ArrayList<Double> list) {
-        
         this.pointCount = this.pointCount + 1;
-        
-        
         for (int i=0;i<this.newPoints.size();i++) {
             double average = (list.get(i)+this.newPoints.get(i))/this.pointCount;
-            //System.out.print(" "+average);
             this.newPoints.set(i,average);
         }
-        
     }
     
     public void clearNewPoints () {
+        this.pointCount = 0;
         for (int i=0;i<this.newPoints.size();i++) {
             this.newPoints.set(i, (double) 0);
         }
-        this.pointCount = 0;
     }
     
     public void printPoints () {
@@ -63,11 +58,7 @@ public class Centroid {
     public boolean didChange() {
         boolean change = false;
         for (int i=0;i<this.points.size();i++) {
-            //System.out.println("OLD POINT"+(this.getPoints()).get(i));
-            //System.out.println("NEW POINT"+(this.getNewPoints()).get(i));
-            //System.out.println("RESULT="+((double) (this.getPoints()).get(i) - (double) (this.getNewPoints()).get(i)));
             if ((double) (this.getPoints()).get(i) - (double) (this.getNewPoints()).get(i) != 0) {
-               //System.out.println("CHANGED AT POINT"+i);
                change = true;
                break;
             }
@@ -77,7 +68,6 @@ public class Centroid {
                 (this.getPoints()).set(j,(this.getNewPoints()).get(j));
             }
         }
-        //System.out.println("CHANGE="+change);
         return change;
     }
 }

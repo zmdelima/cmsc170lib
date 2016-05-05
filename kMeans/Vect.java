@@ -31,10 +31,7 @@ public class Vect {
         for (int i=0;i<this.points.size();i++) {
             dist = dist + Math.pow ((this.points.get(i) - c.get(i)), 2);   
         }
-        
         dist = Math.sqrt(dist);
-        System.out.print("Centroid"+(int) (classification+1)+" distance: "+dist);
-        
         if (this.minDist > dist || this.minDist == -1) {
             this.classification = classification;
             this.minDist = dist;
