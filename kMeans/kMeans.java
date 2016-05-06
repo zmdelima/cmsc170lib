@@ -18,7 +18,7 @@ public class kMeans{
         int i           = 0;
         int j           = 0;
         //reading area
-        File file = new File("training.txt");
+        File file = new File("input.txt");
         
         try{
                 BufferedReader br = new BufferedReader(new FileReader(file));
